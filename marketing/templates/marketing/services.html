@@ -1,0 +1,86 @@
+{% extends "marketing/base.html" %}
+{% load static %}
+{% block title %}Services — Auto Live-Bid Naija{% endblock %}
+
+{% block page_content %}
+<section class="services-header">
+    <div class="services-header-inner">
+        <span class="subheading">— Our Services</span>
+        <h1>Services That Fit <span>Your Needs</span></h1>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="services-grid">
+        <!-- 1. Bidding Card -->
+        <article class="svc-card">
+            <div class="svc-img-wrap" style="background-image: linear-gradient(180deg, rgba(11,59,130,0) 0%, rgba(11,59,130,0.85) 100%), url('{% static "images/live-bid.jpeg" %}');">
+                <div class="svc-icon-box">
+                    <!-- Gavel / Auction Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 13L21 6a2.828 2.828 0 0 0-4-4L10 9M9 9l-4.5 4.5a2.121 2.121 0 1 0 3 3L12 12M16 16l4 4M19 21H5"/></svg>
+                </div>
+            </div>
+            <div class="svc-content">
+                <h3>Live Bidding</h3>
+                <p>We provide real-time bidding on Copart and IAAI auctions, securing your desired vehicle at the best possible wholesale price.</p>
+            </div>
+        </article>
+
+        <!-- 2. Shipping Card -->
+        <article class="svc-card">
+            <div class="svc-img-wrap" style="background-image: linear-gradient(180deg, rgba(11,59,130,0) 0%, rgba(11,59,130,0.85) 100%), url('{% static "images/about-hero.jpeg" %}');">
+                <div class="svc-icon-box">
+                    <!-- Ship / Cargo Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 12l2.5-6h15L22 12M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M8 12v10M16 12v10"/></svg>
+                </div>
+            </div>
+            <div class="svc-content">
+                <h3>Ocean Shipping</h3>
+                <p>Reliable RoRo and container shipping from US ports directly to Lagos. We handle all export documentation and logistics seamlessly.</p>
+            </div>
+        </article>
+
+        <!-- 3. Clearing Card -->
+        <article class="svc-card">
+            <div class="svc-img-wrap" style="background-image: linear-gradient(180deg, rgba(11,59,130,0) 0%, rgba(11,59,130,0.85) 100%), url('{% static "images/custom-clearing.jpeg" %}');">
+                <div class="svc-icon-box">
+                    <!-- Clipboard Check / Customs Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM9 14l2 2 4-4"/></svg>
+                </div>
+            </div>
+            <div class="svc-content">
+                <h3>Customs Clearing</h3>
+                <p>Fast and legitimate Nigeria Customs clearing at Tin Can and Apapa ports. We ensure your vehicle is cleared without delays or hidden fees.</p>
+            </div>
+        </article>
+
+        <!-- 4. Delivery Card -->
+        <article class="svc-card">
+            <div class="svc-img-wrap" style="background-image: linear-gradient(180deg, rgba(11,59,130,0) 0%, rgba(11,59,130,0.85) 100%), url('{% static "images/home-delivery.jpeg" %}');">
+                <div class="svc-icon-box">
+                    <!-- Truck / Delivery Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </div>
+            </div>
+            <div class="svc-content">
+                <h3>Home Delivery</h3>
+                <p>Doorstep delivery across Nigeria. Once cleared, we transport your vehicle safely from the port directly to your preferred location.</p>
+            </div>
+        </article>
+
+        <!-- 5. Bulk Sourcing Card -->
+        <article class="svc-card reveal">
+            <div class="svc-img-wrap" style="background-image: linear-gradient(180deg, rgba(11,59,130,0) 0%, rgba(11,59,130,0.85) 100%), url('{% static "images/bulk-sourcing.jpeg" %}');">
+                <div class="svc-icon-box">
+                    <!-- Stack / Bulk Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg>
+                </div>
+            </div>
+            <div class="svc-content">
+                <h3>Bulk Sourcing</h3>
+                <p>Perfect for dealers and corporate fleets. We source, consolidate, and ship multiple vehicles in 40ft containers to maximize your margins.</p>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

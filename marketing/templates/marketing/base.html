@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="{% url 'marketing_home' %}" class="brand">Auto Live-Bid Naija</a>
+
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+            <span class="bar bar1"></span>
+            <span class="bar bar2"></span>
+            <span class="bar bar3"></span>
+        </button>
+
+        <div class="nav-collapse" id="primary-nav">
+            <ul class="nav-links">
+                <li><a href="{% url 'marketing_home' %}" {% if request.resolver_match.url_name == "marketing_home" %}class="is-active" aria-current="page"{% endif %}>Home</a></li>
+                <li><a href="{% url 'marketing_about' %}" {% if request.resolver_match.url_name == "marketing_about" %}class="is-active" aria-current="page"{% endif %}>About</a></li>
+                <li><a href="{% url 'marketing_services' %}" {% if request.resolver_match.url_name == "marketing_services" %}class="is-active" aria-current="page"{% endif %}>Services</a></li>
+                <li><a href="{% url 'marketing_inventory' %}" {% if request.resolver_match.url_name == "marketing_inventory" %}class="is-active" aria-current="page"{% endif %}>Inventory</a></li>
+                <li><a href="{% url 'marketing_testimonials' %}" {% if request.resolver_match.url_name == "marketing_testimonials" %}class="is-active" aria-current="page"{% endif %}>Testimonials</a></li>
+                <li><a href="{% url 'marketing_contact' %}" {% if request.resolver_match.url_name == "marketing_contact" %}class="is-active" aria-current="page"{% endif %}>Contact</a></li>
+            </ul>
+            <a href="https://wa.me/2349018049682" class="nav-cta" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+    </div>
+</nav>
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <p class="message">{{ message }} <button type="button" class="message-close" aria-label="Dismiss">&times;</button></p>
+    {% endfor %}
+</div>
+{% endif %}
+<main>
+    {% block page_content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="{% url 'marketing_home' %}" class="brand">Auto Live-Bid Naija</a>
+            <p>We source cars from Copart and handle shipping, clearing and delivery to Nigeria, plus bulk sourcing on request.</p>
+            <div class="footer-social">
+                <a href="https://web.facebook.com/profile.php?id=100083385330038" aria-label="Facebook" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5h1.65V3.7C16.4 3.6 15.4 3.5 14.3 3.5c-2.4 0-4 1.45-4 4.15v2.25H7.6V13h2.7v8h3.2z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/autolivebid/" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.9 1.1 1.15 1.76.25.64.42 1.37.47 2.43C21.99 8.95 22 9.3 22 12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.76c-.55.55-1.1.9-1.76 1.15-.64.25-1.37.42-2.43.47C15.05 21.99 14.7 22 12 22s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.76-1.15 4.9 4.9 0 0 1-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76.55-.55 1.1-.9 1.76-1.15.64-.25 1.37-.42 2.43-.47C8.95 2.01 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="{% url 'marketing_about' %}">About</a></li>
+                <li><a href="{% url 'marketing_services' %}">Services</a></li>
+                <li><a href="{% url 'marketing_inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'marketing_testimonials' %}">Testimonials</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Get in touch</h3>
+            <ul>
+                <li><a href="https://wa.me/2349018049682" target="_blank" rel="noopener">WhatsApp</a></li>
+                <li><a href="tel:+2348032360942">+234 803 236 0942</a></li>
+                <li><a href="mailto:autolivebidnaijajiji@gmail.com">autolivebidnaijajiji@gmail.com</a></li>
+                <li>Port-Harcourt, Rivers State, Nigeria</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; {% now "Y" %} Auto Live-Bid Naija. All rights reserved.
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector(".nav-toggle");
+    var collapse = document.getElementById("primary-nav");
+    if (toggle && collapse) {
+        toggle.addEventListener("click", function () {
+            var isOpen = collapse.classList.toggle("is-open");
+            toggle.classList.toggle("is-active", isOpen);
+            toggle.setAttribute("aria-expanded", isOpen);
+        });
+    }
+
+    var filterToggle = document.getElementById("filterToggle");
+    var filterPanel = document.getElementById("filterPanel");
+    if (filterToggle && filterPanel) {
+        filterToggle.addEventListener("click", function () {
+            var isOpen = filterPanel.classList.toggle("is-open");
+            filterToggle.setAttribute("aria-expanded", isOpen);
+        });
+    }
+
+    
+});
+</script>
+{% endblock %}

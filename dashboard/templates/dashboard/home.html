@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Dashboard — Auto Live-Bid Naija{% endblock %}
+{% block content %}
+<div class="dash-wrap">
+    <header class="dash-topbar">
+        <div>
+            <h1>Operations dashboard</h1>
+            <p class="muted">Welcome back, {{ request.user.username }} ({{ request.user.get_role_display }}).</p>
+        </div>
+        <div class="dash-actions">
+            <a href="{% url 'marketing_home' %}" class="btn-outline-sm">← Back to Home</a>
+            <a href="{% url 'logout' %}" class="btn-text-sm">Log out</a>
+        </div>
+    </header>
+
+    <div class="stats-inner">
+        <div class="stat-card reveal">
+            <span class="stat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg></span>
+            <span class="stat-number" data-count-to="{{ unpaid_count }}">0</span>
+            <span class="stat-label">Orders with balance due</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <span class="stat-number" data-count-to="{{ total_outstanding|floatformat:0 }}" data-prefix="$">0</span>
+            <span class="stat-label">Total outstanding (USD)</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><rect x="3" y="13" width="18" height="6" rx="1.5"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/></svg></span>
+            <span class="stat-number" data-count-to="{{ unsold_count }}">0</span>
+            <span class="stat-label">Vehicles in stock</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span>
+            <span class="stat-number" data-count-to="{{ awaiting_count }}">0</span>
+            <span class="stat-label">Awaiting customer decision</span>
+        </div>
+    </div>
+
+    <div class="dash-grid">
+        <section class="dash-panel reveal">
+            <h2>Orders with an outstanding balance</h2>
+            <ul class="dash-list">
+                {% for row in unpaid_orders %}
+                <li>
+                    <span>Order #{{ row.order.pk }} — {{ row.order.customer.name }}</span>
+                    <span class="dash-amount">${{ row.balance|floatformat:2|intcomma }}</span>
+                </li>
+                {% empty %}
+                <li class="dash-empty">Nothing outstanding.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dash-panel reveal">
+            <h2>Vehicles by stage</h2>
+            <ul class="dash-list">
+                {% for row in vehicles_by_stage %}
+                <li><span>{{ row.stage }}</span><span class="dash-amount">{{ row.count }}</span></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dash-panel reveal">
+            <h2>Unsold stock (available)</h2>
+            <ul class="dash-list">
+                {% for v in unsold_stock %}
+                <li>{{ v }}</li>
+                {% empty %}
+                <li class="dash-empty">None currently.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dash-panel reveal">
+            <h2>Awaiting a decision (lost bid)</h2>
+            <ul class="dash-list">
+                {% for v in awaiting_decision %}
+                <li>{{ v }} — Order #{{ v.order.pk }} — {{ v.order.customer.name }}</li>
+                {% empty %}
+                <li class="dash-empty">None currently.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</div>
+{% endblock %}

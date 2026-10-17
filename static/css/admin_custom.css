@@ -1,0 +1,29 @@
+:root {
+  --primary: #0B3B82;
+  --secondary: #082A5E;
+  --accent: #DC2626;
+  --primary-fg: #fff;
+
+  --header-color: #fff;
+  --header-bg: var(--secondary);
+  --header-branding-color: #fff;
+  --header-link-color: #fff;
+
+  --breadcrumbs-fg: #DCE8FB;
+  --breadcrumbs-bg: var(--secondary);
+
+  --link-fg: #0B3B82;
+  --link-hover-color: #082A5E;
+  --link-selected-fg: #0B3B82;
+
+  --button-bg: var(--primary);
+  --button-hover-bg: var(--secondary);
+  --default-button-bg: var(--secondary);
+  --default-button-hover-bg: #061d40;
+
+  --selected-bg: #EFF6FF;
+  --selected-row: #EFF6FF;
+}
+
+#header { background: var(--header-bg); color: var(--header-color); }
+div.breadcrumbs { background: var(--secondary); }

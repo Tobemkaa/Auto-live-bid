@@ -1,0 +1,95 @@
+{% extends "marketing/base.html" %}
+{% load humanize %}
+{% block title %}Inventory — Auto Live-Bid Naija{% endblock %}
+{% block page_content %}
+<section class="inventory-header">
+    <div class="inventory-header-inner">
+        <h1>Available vehicles</h1>
+        <p>{{ count }} vehicle{{ count|pluralize }} — cleared, inspected, and ready to ship.</p>
+    </div>
+</section>
+
+<div class="inventory-wrap">
+    <div class="inventory-layout">
+        <aside class="filter-sidebar">
+    <form method="get" class="filter-form">
+        <!-- Search stays visible at all times -->
+        <div class="filter-group">
+            <label for="q">Search</label>
+            <input type="text" id="q" name="q" value="{{ query }}" placeholder="Make or model...">
+        </div>
+
+        <!-- Toggle Button (Visible only on mobile) -->
+        <button type="button" class="filter-toggle" id="filterToggle" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Advanced Filters
+        </button>
+
+        <!-- The collapsible section hooks into your existing JS -->
+        <div id="filterPanel" class="advanced-filters">
+            <div class="filter-group">
+                <span class="filter-label">Brand</span>
+                {% for make in all_makes %}
+                <label class="checkbox-row">
+                    <input type="checkbox" name="make" value="{{ make }}" {% if make in selected_makes %}checked{% endif %}>
+                    {{ make }}
+                </label>
+                {% empty %}
+                <p class="muted">No vehicles listed yet.</p>
+                {% endfor %}
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label" id="filter-usd">Price range (USD)</span>
+                <div class="price-inputs">
+                    <input type="number" name="price_min" value="{{ price_min }}" placeholder="Min" min="0">
+                    <span>–</span>
+                    <input type="number" name="price_max" value="{{ price_max }}" placeholder="Max" min="0">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort" class="sort-by">Sort by</label>
+                <select id="sort" name="sort">
+                    <option value="newest" {% if sort == "newest" %}selected{% endif %}>Newest listed</option>
+                    <option value="price_low" {% if sort == "price_low" %}selected{% endif %}>Price: low to high</option>
+                    <option value="price_high" {% if sort == "price_high" %}selected{% endif %}>Price: high to low</option>
+                </select>
+            </div>
+
+            <div class="filter-actions">
+                <button type="submit" class="btn-apply">Apply filters</button>
+                <a href="{% url 'marketing_inventory' %}" class="btn-reset">Reset</a>
+            </div>
+        </div>
+    </form>
+</aside>
+
+        <div class="vehicle-grid">
+            {% for v in vehicles %}
+            <article class="vehicle-card reveal">
+                <div class="vehicle-photo">
+                    {% if v.photo %}
+                        <img src="{{ v.photo.url }}" alt="{{ v.year }} {{ v.make }} {{ v.model }}" loading="lazy">
+                    {% else %}
+                        <div class="no-photo">Photo coming soon</div>
+                    {% endif %}
+                    <span class="pill">{{ v.year }}</span>
+                </div>
+                <div class="vehicle-info">
+                    <h3>{{ v.make }} {{ v.model }}</h3>
+                    <div class="vehicle-footer">
+                        <span class="price">
+                            {% if v.asking_price %}${{ v.asking_price|floatformat:0|intcomma }}{% else %}Price on request{% endif %}
+                        </span>
+                        <a href="https://wa.me/2349018049682?text={{ v.whatsapp_text }}" class="btn-enquire" target="_blank" rel="noopener">Enquire</a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <p class="empty-state">No vehicles match your filters right now — try widening your search, or <a href="{% url 'marketing_contact' %}">tell us what you're looking for</a> and we'll source it.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

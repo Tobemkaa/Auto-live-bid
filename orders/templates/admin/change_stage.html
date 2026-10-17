@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Change stage</h1>
+<p>Vehicles selected:</p>
+<ul>{% for v in vehicles %}<li>{{ v }}</li>{% endfor %}</ul>
+<form method="post">
+    {% csrf_token %}
+    {% for v in vehicles %}
+        <input type="hidden" name="_selected_action" value="{{ v.pk }}">
+    {% endfor %}
+    <input type="hidden" name="action" value="change_stage_action">
+    {{ form.as_p }}
+    <button type="submit" name="apply">Apply</button>
+</form>
+{% endblock %}

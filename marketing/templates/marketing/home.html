@@ -1,0 +1,21 @@
+{% extends "marketing/base.html" %}
+{% load static %}
+{% block title %}Auto Live-Bid Naija — Home{% endblock %}
+
+{% block page_content %}
+<!-- We pass the Django static image to CSS using a variable -->
+<section class="home-hero" style="--hero-bg: url('{% static "images/home-image.jpg" %}');">
+    <div class="home-hero-inner">
+        <div class="home-hero-content reveal">
+            <span class="home-kicker">Quality Vehicles. Exceptional Service.</span>
+            <h1>DRIVE YOUR <br><span>DREAM TODAY</span></h1>
+            <p>Explore our selection of new and pre-owned vehicles and find the perfect match for your lifestyle.</p>
+            
+            <div class="home-hero-actions">
+                <a href="{% url 'marketing_inventory' %}" class="btn-solid">BROWSE INVENTORY</a>
+                <a href="{% url 'dashboard_home' %}" class="btn-outline">STAFF DASHBOARD</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

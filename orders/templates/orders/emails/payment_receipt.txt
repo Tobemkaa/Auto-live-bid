@@ -1,0 +1,14 @@
+Hello {{ payment.order.customer.name }},
+
+We have received your payment for Order #{{ payment.order.pk }}.
+
+Amount received: {{ payment.currency }} {{ payment.amount }}
+{% if payment.currency == "NGN" %}Exchange rate used: ₦{{ payment.ngn_per_usd }} / $1{% endif %}
+USD equivalent: ${{ payment.amount_usd }}
+Date: {{ payment.paid_on }}
+Reference: {{ payment.reference|default:"—" }}
+
+Order balance remaining: ${{ balance }}
+
+Thank you for your business.
+Auto Live-Bid Naija
