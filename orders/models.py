@@ -4,6 +4,7 @@ from decimal import Decimal
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import UploadedFile
 
 
 class Order(models.Model):
@@ -108,7 +109,7 @@ class Vehicle(models.Model):
         )
         
     def save(self, *args, **kwargs):
-        if self.photo:
+        if self.photo and isinstance(self.photo.file, UploadedFile):
             img = Image.open(self.photo)
             if img.height > 1000 or img.width > 1400:
                 img.thumbnail((1400, 1000))
