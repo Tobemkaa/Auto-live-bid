@@ -1,6 +1,10 @@
 from django.db import models
 from django.conf import settings
 from decimal import Decimal
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+
 
 class Order(models.Model):
     class Type(models.TextChoices):
@@ -102,6 +106,17 @@ class Vehicle(models.Model):
             changed_by=user,
             note=note,
         )
+        
+    def save(self, *args, **kwargs):
+        if self.photo:
+            img = Image.open(self.photo)
+            if img.height > 1000 or img.width > 1400:
+                img.thumbnail((1400, 1000))
+                buffer = BytesIO()
+                img_format = "JPEG" if img.mode == "RGB" else "PNG"
+                img.convert("RGB").save(buffer, format=img_format, quality=80, optimize=True)
+                self.photo.save(self.photo.name, ContentFile(buffer.getvalue()), save=False)
+        super().save(*args, **kwargs)
 
 class StatusHistory(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, related_name="status_history")
