@@ -317,6 +317,7 @@ img { max-width: 100%; display: block; }
 .vehicle-card {
   background: #fff; border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden;
   display: flex; flex-direction: column; transition: box-shadow 0.15s ease, transform 0.15s ease;
+  max-width: 380px;
 }
 .vehicle-card:hover { box-shadow: 0 16px 32px -18px rgba(15,23,42,0.25); transform: translateY(-2px); }
 .vehicle-photo { position: relative; aspect-ratio: 4 / 3; background: var(--color-canvas); }
