@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from marketing.sitemaps import StaticViewSitemap
 
 
 admin.site.site_header = "Auto Live-Bid Naija"
@@ -36,4 +38,8 @@ urlpatterns = [
 
 urlpatterns += [
     path("media/<path:path>", serve, {"document_root": settings.MEDIA_ROOT}),
+]
+
+urlpatterns += [
+    path("sitemap.xml", sitemap, {"sitemaps": {"static": StaticViewSitemap()}}),
 ]

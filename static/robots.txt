@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /accounts/
+Sitemap: https://autolive-bidnaija.com/sitemap.xml
